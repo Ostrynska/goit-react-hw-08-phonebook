@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Notiflix from 'notiflix';
 import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { addContant } from '../../redux/contacts/operations';
+import { addContact } from '../../redux/contacts/operations';
 import { selectAllContacts } from '../../redux/contacts/selectors';
 import {
   ContactsForm,
@@ -25,7 +25,7 @@ export const ContactForm = () => {
     contacts.some(contact => contact.name === name)
       ? Notiflix.Notify.failure(`${name} is already in contacts`)
       : dispatch(
-          addContant({
+          addContact({
             id: nanoid(4),
             name,
             phone,

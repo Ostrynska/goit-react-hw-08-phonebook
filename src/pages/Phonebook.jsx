@@ -19,7 +19,6 @@ export default function Phonebook() {
 
   return (
     <>
-      {/* <Box fontSize={16} pt="60px" as="section"> */}
       <h1
         style={{
           textAlign: 'center',
@@ -31,8 +30,6 @@ export default function Phonebook() {
         Phonebook
       </h1>
       <ContactForm />
-      {/* </Box> */}
-      {/* <Box fontSize={16} pt="30px" as="section"> */}
       <h2
         style={{
           textAlign: 'center',
@@ -46,7 +43,6 @@ export default function Phonebook() {
       <Filter />
       {isLoading && !error}
       <ContactList />
-      {/* </Box> */}
     </>
   );
 }
