@@ -1,55 +1,46 @@
 import { useState } from 'react';
 import Notiflix from 'notiflix';
 import { useSelector, useDispatch } from 'react-redux';
-import { nanoid } from '@reduxjs/toolkit';
 import { addContact } from '../../redux/contacts/operations';
-import { selectAllContacts } from '../../redux/contacts/selectors';
+import { selectContacts, selectLoading } from '../../redux/contacts/selectors';
 import {
   ContactsForm,
   ContactsLabel,
   ContactsInput,
   ContactsButton,
-  ErrorMessages,
 } from './ContactForm.styled';
 
 export const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-
-  const contacts = useSelector(selectAllContacts);
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectLoading);
 
   const handleSubmit = e => {
     e.preventDefault();
+    const form = e.target;
+    const name = form.elements[0].value;
+    const number = form.elements[1].value;
 
-    contacts.some(contact => contact.name === name)
-      ? Notiflix.Notify.failure(`${name} is already in contacts`)
-      : dispatch(
-          addContact({
-            id: nanoid(4),
-            name,
-            phone,
-          })
-        );
+    const contact = {
+      name,
+      number,
+    };
 
-    setName('');
-    setPhone('');
-  };
-
-  const handleChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'phone':
-        setPhone(value);
-        break;
-
-      default:
-        break;
+    if (
+      contacts
+        ?.map(({ name }) => name.toLowerCase())
+        .includes(name.toLowerCase())
+    ) {
+      // toast(`${name} is already in contacts.`,
+      //   {
+      //   icon: '🤦🏻‍♂️',
+      //   position: 'top-center',
+      // });
+      return;
+    } else {
+      dispatch(addContact(contact));
     }
+    form.reset();
   };
 
   return (
@@ -59,26 +50,20 @@ export const ContactForm = () => {
         <ContactsInput
           type="text"
           name="name"
-          value={name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          onChange={handleChange}
           required
         />
-        <ErrorMessages component="div" name="name" />
       </ContactsLabel>
       <ContactsLabel>
         Number
         <ContactsInput
           type="tel"
-          name="phone"
-          value={phone}
+          name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone phone must be digits and can contain spaces, dashes, parentheses and can start with +"
-          onChange={handleChange}
+          title="number number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <ErrorMessages component="div" name="phone" />
       </ContactsLabel>
       <ContactsButton type="submit">Add contact</ContactsButton>
     </ContactsForm>
