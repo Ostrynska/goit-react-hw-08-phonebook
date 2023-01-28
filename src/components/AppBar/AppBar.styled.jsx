@@ -1,9 +1,9 @@
 import styled from 'styled-components';
+import AppBar from '@mui/material/AppBar';
 
-export const Header = styled.header`
+export const AppBarStyled = styled(AppBar)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #2a363b;
+  ${'' /* padding: 16px; */}
 `;
