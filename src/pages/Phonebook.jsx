@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchContacts } from 'redux/contacts/operations';
-import { selectError, selectLoading } from 'redux/contacts/selectors';
+import { selectLoading } from 'redux/contacts/selectors';
 
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
@@ -11,7 +11,7 @@ import Filter from '../components/Filter/Filter';
 export default function Phonebook() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
-  const error = useSelector(selectError);
+  // const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -41,7 +41,7 @@ export default function Phonebook() {
         Contacts
       </h2>
       <Filter />
-      {isLoading && !error}
+      {isLoading}
       <ContactList />
     </>
   );
