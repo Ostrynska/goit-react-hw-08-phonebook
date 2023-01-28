@@ -1,7 +1,12 @@
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
-import { selectFilteredContacts } from 'redux/contacts/selectors';
+import {
+  selectContacts,
+  selectFilter,
+  selectLoading,
+} from 'redux/contacts/selectors';
 
 import {
   ContactsList,
@@ -9,24 +14,39 @@ import {
   ContactsListInf,
   ContactsListButton,
 } from './ContactList.styled';
+import { fetchContacts } from 'redux/contacts/operations';
 import { IoTrashBinOutline } from 'react-icons/io5';
 import { IconContext } from 'react-icons';
 import { MdContactPage } from 'react-icons/md';
 
 const ContactList = () => {
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(selectFilter);
+  const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
-  const contacts = useSelector(selectFilteredContacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  function handleFilter() {
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }
+
+  const filterContacts = handleFilter();
 
   return (
     <ContactsList>
-      {contacts.map(({ id, name, phone }) => (
+      {filterContacts?.map(({ id, name, number }) => (
         <ContactsListItem key={id}>
           <IconContext.Provider value={{ color: '#d85841' }}>
             <MdContactPage />
           </IconContext.Provider>
           <ContactsListInf>
             <b>{name}: </b>
-            {phone}
+            {number}
           </ContactsListInf>
           <ContactsListButton
             type="submit"
@@ -46,7 +66,7 @@ ContactList.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ),
 };
