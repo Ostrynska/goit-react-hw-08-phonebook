@@ -6,6 +6,26 @@ import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import '@fontsource/roboto';
+
+const theme = createTheme({
+  typography: {},
+  palette: {
+    primary: {
+      light: '#FFF7E8',
+      main: '#d85841',
+      dark: '#1c4931',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#9EADBB',
+      main: '#9C9CB8',
+      dark: '#85909C',
+      contrastText: '#fff',
+    },
+  },
+});
 
 const HomePage = lazy(() => import('../pages/Home'));
 const RegisterPage = lazy(() => import('../pages/Register'));
@@ -23,32 +43,37 @@ export const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute
-              redirectTo="/contacts"
-              component={<RegisterPage />}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<PhonebookPage />} />
-          }
-        />
-        <Route path="*" element={<p>Path not resolved</p>} />
-      </Route>
-    </Routes>
+    <ThemeProvider theme={theme}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<PhonebookPage />} />
+            }
+          />
+          <Route path="*" element={<p>Path not resolved</p>} />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 };
