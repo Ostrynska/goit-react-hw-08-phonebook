@@ -11,7 +11,6 @@ import Filter from '../components/Filter/Filter';
 export default function Phonebook() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -19,16 +18,6 @@ export default function Phonebook() {
 
   return (
     <>
-      <h1
-        style={{
-          textAlign: 'center',
-          textTransform: 'uppercase',
-          fontSize: '28px',
-          color: '#1C4931',
-        }}
-      >
-        Phonebook
-      </h1>
       <ContactForm />
       <h2
         style={{
