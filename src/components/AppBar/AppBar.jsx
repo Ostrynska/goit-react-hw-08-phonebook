@@ -31,7 +31,7 @@ export const AppBarNavigation = () => {
               textDecoration: 'none',
             }}
           >
-            PHONEBOOK
+            MY CONTACTS
           </Typography>
           <Navigation />
           {isLoggedIn ? <UserMenu /> : <AuthNav />}
