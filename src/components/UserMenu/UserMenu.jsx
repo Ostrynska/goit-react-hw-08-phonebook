@@ -1,8 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
-import { Wrapper, Username } from './UserMenu.styled';
+import { Wrapper, Username, Name } from './UserMenu.styled';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { theme } from '../App';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
@@ -10,15 +13,20 @@ export const UserMenu = () => {
 
   return (
     <Wrapper>
-      <Username>Welcome, {user.name}</Username>
-      <Button
-        color="secondary"
-        variant="outlined"
-        size="small"
-        onClick={() => dispatch(logOut())}
-      >
-        Logout
-      </Button>
+      <Username>
+        Welcome, <Name>{user.name}</Name>
+      </Username>
+      <Box margin="auto" theme={theme} onClick={() => dispatch(logOut())}>
+        <Button
+          color="secondary"
+          size="small"
+          variant="outlined"
+          fontWeight={700}
+          startIcon={<LogoutIcon />}
+        >
+          Logout
+        </Button>
+      </Box>
     </Wrapper>
   );
 };
