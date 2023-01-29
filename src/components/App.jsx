@@ -9,7 +9,7 @@ import { useAuth } from 'hooks';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import '@fontsource/roboto';
 
-const theme = createTheme({
+export const theme = createTheme({
   typography: {},
   palette: {
     primary: {
@@ -20,10 +20,11 @@ const theme = createTheme({
     },
     secondary: {
       light: '#9EADBB',
-      main: '#9C9CB8',
-      dark: '#85909C',
-      contrastText: '#fff',
+      main: '#FFF7E8',
+      dark: '#d85841',
+      contrastText: '#d85841',
     },
+    spacing: [0, 4, 8, 16, 32, 64],
   },
 });
 
