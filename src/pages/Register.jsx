@@ -4,12 +4,10 @@ import { RegisterForm } from 'components/RegisterForm/RegisterForm';
 export default function Register() {
   return (
     <HelmetProvider>
-      <div>
-        <Helmet>
-          <title>Registration</title>
-        </Helmet>
-        <RegisterForm />
-      </div>
+      <Helmet>
+        <title>Registration</title>
+      </Helmet>
+      <RegisterForm />
     </HelmetProvider>
   );
 }
