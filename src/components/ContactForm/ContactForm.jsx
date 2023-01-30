@@ -95,12 +95,11 @@
 // };
 
 // export default ContactForm;
-
-import { useState } from 'react';
 import Notiflix from 'notiflix';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
 import { selectContacts, selectLoading } from '../../redux/contacts/selectors';
+
 import {
   ContactsForm,
   ContactsLabel,

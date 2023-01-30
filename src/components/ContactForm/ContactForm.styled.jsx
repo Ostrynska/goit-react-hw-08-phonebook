@@ -47,9 +47,3 @@ export const ContactsButton = styled.button`
     background-color: #1c4931;
   }
 `;
-
-export const ErrorMessages = styled.p`
-  font-weight: 700;
-  font-size: 12px;
-  color: #d85841;
-`;

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 export const Link = styled(NavLink)`
   text-decoration: none;
-  font-weight: 700;
   color: #fff7e8;
   &.active {
+    font-weight: 700;
     color: #d85841;
   }
 `;

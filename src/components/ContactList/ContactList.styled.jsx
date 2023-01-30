@@ -6,11 +6,12 @@ export const ContactsList = styled.ul`
   flex-direction: column;
   padding: 12px;
   margin: auto;
-  max-width: 450px;
-  gap: 5px;
+  width: 450px;
 `;
 export const ContactsListItem = styled.li`
   display: flex;
+  align-items: center;
+  justify-content: baseline;
 `;
 export const ContactsListInf = styled.p`
   margin-left: 10px;
