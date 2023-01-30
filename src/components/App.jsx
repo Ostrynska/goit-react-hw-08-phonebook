@@ -7,7 +7,7 @@ import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import '@fontsource/roboto';
+import '@fontsource/montserrat';
 
 export const theme = createTheme({
   typography: {},

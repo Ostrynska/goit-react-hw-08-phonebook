@@ -15,27 +15,17 @@ const authSlice = createSlice({
     builder
       .addCase(register.pending, (state, action) => state)
       .addCase(register.fulfilled, (state, action) => {
-        // toast.success('You have successfully registered.');
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
-      // .addCase(register.rejected, (state, action) => {
-      //   // toast.error(action.payload, {
-      //   //   duration: 2000,
-      //   // });
-      // })
+      .addCase(register.rejected, (state, action) => {})
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        // toast.success(`Welcome, ${action.payload.user.name}`);
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
-      // .addCase(login.rejected, (state, action) => {
-      //   toast.error(action.payload, {
-      //     duration: 2000,
-      //   });
-      // })
+      .addCase(logIn.rejected, (state, action) => {})
       .addCase(logOut.fulfilled, (state, action) => {
         state.user = { name: null, email: null };
         state.isLoggedIn = false;

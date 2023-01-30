@@ -2,11 +2,7 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
-import {
-  selectContacts,
-  selectFilter,
-  selectLoading,
-} from 'redux/contacts/selectors';
+import { selectContacts, selectFilter } from 'redux/contacts/selectors';
 
 import {
   ContactsList,
@@ -22,7 +18,6 @@ import { MdContactPage } from 'react-icons/md';
 const ContactList = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
-  const isLoading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,7 +57,7 @@ const ContactList = () => {
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
+  filterContacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
